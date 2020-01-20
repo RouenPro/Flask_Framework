@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+
+{% block head %}
+<title>Post Route</title>
+<link rel="stylesheet" href='static/css/style.css'/>
+{% endblock %}
+
+
+
+{% block body %}
+    <h1>All Post</h1>
+    <hr>
+    <h2>Create New Blog Post</h2>
+    <form action="/post" method="POST">
+        Title: <input type="text" name="title" id="title">
+        <br>
+        Post: <input type="text" name="content" id="content">
+        <br>
+        Author: <input type="text" name="author" id="author">
+        <br>
+        <input type="submit" value="Post">
+    </form>
+    </hr>
+
+    {% for post in posts %}
+        <h2>{{ post.title }}</h2>
+        {% if post.author %}
+            <h5>By: {{post.author}}</h5>
+        {% else %}
+            <h5>By: N/A </h5>
+        {% endif %}
+        <p>{{ post.content }}</p>
+        <a href='/post/delete/{{post.id}}'>Delete</a>
+        <a href="post/edit/{{post.id}}">Edit</a>
+        <hr>
+    {% endfor %}
+{% endblock %}
